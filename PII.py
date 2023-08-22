@@ -1,16 +1,15 @@
 def remove_pii(text):
-    pii_keywords = [
-        "name", "address", "phone", "email", "SSN", "credit card", "bank account", "passport", "medical record", "health insurance", "biometric", "username", "IP address", "GPS coordinates"]
+    pii_keywords = ["name", "address", "phone", "email", "SSN", "credit card", "bank account", "passport", "medical record", "health insurance", "biometric", "username", "IP address", "GPS coordinates"]
     words = text.split()
     result = []
     for word in words:
-        contains_pii = any(keyword in word.lower() for keyword in pii_keywords)
-        if not contains_pii:
+        cont = any(keyword in word.lower() for keyword in pii_keywords)
+        if not cont:
             result.append(word)
         else:
             result.append("[REDACTED]")
-    redacted_text = ' '.join(result)
-    return redacted_text
-text_with_pii = "Hello, my name is John and my phone number is 123-456-7890."
-redacted_text = remove_pii(text_with_pii)
-print(redacted_text)
+    output = ' '.join(result)
+    return output
+input = "Anish's email is test@temp.com and his phone number is 123-456-7890, SSN is 765-433-123"
+output = remove_pii(input)
+print(output)
